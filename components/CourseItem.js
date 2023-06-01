@@ -1,10 +1,20 @@
-import { StyleSheet, Image, Text, View } from 'react-native'
+import { StyleSheet, Image, Text, View, TouchableOpacity, TouchableHighlight } from 'react-native'
 import React from 'react'
 import globaleStyles from '../Styles/globaleStyles'
+import { MaterialIcons } from '@expo/vector-icons';
 
 const CourseItem = (props) => {
   return (
-    <View style={styles.courseContainer}>
+    <TouchableHighlight 
+    underlayColor={globaleStyles.green}
+    onPress={props.viewDetails}
+    >
+
+        <View style={styles.courseContainer}
+        >
+        
+        
+        
         <View style={styles.imageContainer}>
             <Image 
             
@@ -17,8 +27,22 @@ const CourseItem = (props) => {
             <Text style={styles.coursePrice}>{props.price}$</Text>
 
         </View>
-      
-    </View>
+      <View style={styles.iconsContainer}>
+        <TouchableOpacity
+            onPress={props.viewDetails}
+        >
+            <MaterialIcons name="remove-red-eye" size={35} color={globaleStyles.green} />
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+            onPress={props.onAddToCart}
+        >
+            <MaterialIcons name="shopping-basket" size={35} color={globaleStyles.green} />
+        </TouchableOpacity>
+      </View>
+    
+      </View>
+    </TouchableHighlight>
   )
 }
 
@@ -37,6 +61,9 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: "100%",
         height: "60%",
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        overflow: 'hidden'
 
     },
     image: {
@@ -62,6 +89,14 @@ const styles = StyleSheet.create({
         color: globaleStyles.darkGrey,
         fontSize: 16,
 
+    },
+
+    iconsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems:'center',
+        height:'20%',
+        paddingHorizontal: 30
     }
 
 })
