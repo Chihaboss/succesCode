@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
-import Landing from './Screen/Landing';
+import AppNav from './routes/AppNav';
 
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
 
     <Provider store={store}>
 
-    <Landing />
+    <AppNav />
     
     </Provider>
     
