@@ -22,7 +22,7 @@ const Landing = ({navigation}) => {
         price = {item.price}
         viewDetails = {() => navigation.navigate('Details',
         {
-          courseId : item.courseId,
+          courseId : item.id,
           title : item.title
         }
         )}
