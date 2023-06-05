@@ -1,13 +1,25 @@
 import { ScrollView, StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import {useSelector} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import globalstyles from '../Styles/globaleStyles'
 import { MaterialIcons } from '@expo/vector-icons';
+import { addTocart } from '../Redux/actions/actionAddToCart';
+
+
 const CourseInfos = ({navigation, route}) => {
+  
   const courseId = route.params.courseId
 
+  const dispatch = useDispatch();
+  
   const selectedCourse = useSelector(state => state.courses.existingCourses.find(course => course.id === courseId))
   
+  const handleAddToCart = () => {
+    dispatch(addTocart(selectedCourse));
+    navigation.goBack();
+    alert('Formation ajoutee au panier');
+  }
+
   if (!selectedCourse) {
     // Vous pouvez retourner un composant d'erreur ou null ici
     return null;
@@ -48,7 +60,7 @@ const CourseInfos = ({navigation, route}) => {
           
           />
           <TouchableOpacity
-              onPress={() => alert('Ajoute au panier')}
+              onPress={handleAddToCart}
           >
             <View style = {styles.btnAddTocart}>
               <Text style = {styles.btnAddTocartText}>Ajouter au panier</Text>
@@ -124,7 +136,7 @@ const styles = StyleSheet.create({
  },
  btnAddTocartText: {
     fontSize: 19,
-    
+
  }
 
 })
